@@ -1,0 +1,10 @@
+:host := "http://localhost:4242"
+
+# root
+GET :host
+
+# test 
+GET :host/test
+
+# test 
+GET :host/test?word=tmp1&tmp=tmp2
