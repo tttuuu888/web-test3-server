@@ -10,6 +10,7 @@
    (author :col-type user)))
 
 (defun db-init ()
+  (format t "db-init~%")
   (mito:connect-toplevel :sqlite3 :database-name "web-test")
   (mito:table-definition 'user)
   (mito:table-definition 'post)
@@ -20,6 +21,15 @@
   (if (mito:find-dao 'user :email email)
       'exists
       (mito:create-dao 'user :name name :email email)))
+
+(defun user-remove (&key email)
+  (let ((user (mito:find-dao 'user :email email)))
+    (if (not user)
+        'not-exists
+        (mito:delete-dao user))))
+
+(defun user-find (&key email)
+  (mito:find-dao 'user :email email))
 
 (defun db-test ()
   (format t "db test"))
