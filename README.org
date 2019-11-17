@@ -24,32 +24,34 @@
 * ERD
 #+begin_src plantuml :file erd.png
   @startuml
-  !define table(x) class x  << (T,#FFAAAA) >>
-  !define primary_key(x) <b>x</b>
-  !define unique(x) <color:green>x</color>
-  !define not_null(x) <u>x</u>
+  skinparam defaultFontName D2Coding
   hide methods
   hide stereotypes
+  !define table(x) class x  << (T,#FFAAAA) >>
+
   table(user) {
-          primary_key(unique(id)) INTEGER
-          not_null(name)  VARCHAR[24]
-          not_null(email) VARCHAR[64]
-          not_null(password)  VARCHAR[24]
+          id          INTEGER
+          --
+          name        VARCHAR[24]
+          email       VARCHAR[64]
+          password    VARCHAR[24]
   }
 
   table(post) {
-          primary_key(unique(id)) INTEGER
-          not_null(post_author_id) INTEGER
-          not_null(post_author_name)  VARCHAR[24]
-          not_null(title)  VARCHAR[128]
-          not_null(content) TEXT
-          not_null(views) INTEGER
+          id                  INTEGER
+          --
+          post_author_id      INTEGER
+          post_author_name    VARCHAR[24]
+          title               VARCHAR[128]
+          content             TEXT
+          views               INTEGER
   }
 
   table(post_author) {
-          primary_key(unique(id)) INTEGER
-          not_null(name)  VARCHAR[24]
-          not_null(password)  VARCHAR[24]
+          id          INTEGER
+          --
+          name        VARCHAR[24]
+          password    VARCHAR[24]
   }
 
   post -[hidden] post_author
@@ -60,7 +62,7 @@
   post
   end note
   note top of post_author
-  Author of each post 
+  Author of each post
   end note
 
   @enduml
