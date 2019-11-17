@@ -11,7 +11,7 @@
 
 (defun db-init ()
   (format t "db-init~%")
-  (mito:connect-toplevel :sqlite3 :database-name "web-test")
+  (mito:connect-toplevel :sqlite3 :database-name "web-test.sqlite")
   (mito:table-definition 'user)
   (mito:table-definition 'post)
   (mito:ensure-table-exists 'user)
