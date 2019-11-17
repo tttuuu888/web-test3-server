@@ -1,26 +1,26 @@
 * Web-Test3 
-
 ** Usage
 
 ** Installation
 
 * Site map
-|   | Depth 1      | Depth 2        | Depth 3       |
-|---+--------------+----------------+---------------|
-|   | (main page)  | (post)         | (delete post) |
-|   | post list    | title          | password      |
-|   | pagenation   | author         | commit        |
-|   | write button | content        | cancel        |
-|   |              | delete button  |               |
-|---+--------------+----------------+---------------|
-|   |              | (write post)   |               |
-|   |              | author name    |               |
-|   |              | author pasword |               |
-|   |              | title          |               |
-|   |              | content        |               |
-|   |              | commit button  |               |
-|   |              | cancel button  |               |
-|---+--------------+----------------+---------------|
+|   | Depth 1      | Depth 2             | Depth 3       |
+|---+--------------+---------------------+---------------|
+|   | (main page)  | (post)              | (delete post) |
+|   | post list    | title               | password      |
+|   | pagenation   | author              | commit        |
+|   | write button | content             | cancel        |
+|   |              | delete button       |               |
+|   |              | back to list button |               |
+|---+--------------+---------------------+---------------|
+|   |              | (write post)        |               |
+|   |              | author name         |               |
+|   |              | author pasword      |               |
+|   |              | title               |               |
+|   |              | content             |               |
+|   |              | commit button       |               |
+|   |              | cancel button       |               |
+|---+--------------+---------------------+---------------|
 * ERD
 #+begin_src plantuml :file erd.png
   @startuml
@@ -31,32 +31,29 @@
 
   table(user) {
           id          INTEGER
-          --
-          name        VARCHAR[24]
-          email       VARCHAR[64]
-          password    VARCHAR[24]
+          ..
+          name        VARCHAR(24)
+          email       VARCHAR(64)
+          password    VARCHAR(24)
   }
-
   table(post) {
           id                  INTEGER
-          --
+          ..
           post_author_id      INTEGER
-          post_author_name    VARCHAR[24]
-          title               VARCHAR[128]
+          title               VARCHAR(128)
           content             TEXT
           views               INTEGER
   }
 
   table(post_author) {
           id          INTEGER
-          --
-          name        VARCHAR[24]
-          password    VARCHAR[24]
+          ..
+          name        VARCHAR(24)
+          password    VARCHAR(24)
   }
 
   post -[hidden] post_author
   post::post_author_id --> post_author::id
-  post::post_author_name --> post_author::name
 
   note top of post
   post
