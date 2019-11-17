@@ -3,3 +3,68 @@
 ** Usage
 
 ** Installation
+
+* Site map
+|   | Depth 1      | Depth 2        | Depth 3       |
+|---+--------------+----------------+---------------|
+|   | (main page)  | (post)         | (delete post) |
+|   | post list    | title          | password      |
+|   | pagenation   | author         | commit        |
+|   | write button | content        | cancel        |
+|   |              | delete button  |               |
+|---+--------------+----------------+---------------|
+|   |              | (write post)   |               |
+|   |              | author name    |               |
+|   |              | author pasword |               |
+|   |              | title          |               |
+|   |              | content        |               |
+|   |              | commit button  |               |
+|   |              | cancel button  |               |
+|---+--------------+----------------+---------------|
+* ERD
+#+begin_src plantuml :file erd.png
+  @startuml
+  !define table(x) class x  << (T,#FFAAAA) >>
+  !define primary_key(x) <b>x</b>
+  !define unique(x) <color:green>x</color>
+  !define not_null(x) <u>x</u>
+  hide methods
+  hide stereotypes
+  table(user) {
+          primary_key(unique(id)) INTEGER
+          not_null(name)  VARCHAR[24]
+          not_null(email) VARCHAR[64]
+          not_null(password)  VARCHAR[24]
+  }
+
+  table(post) {
+          primary_key(unique(id)) INTEGER
+          not_null(post_author_id) INTEGER
+          not_null(post_author_name)  VARCHAR[24]
+          not_null(title)  VARCHAR[128]
+          not_null(content) TEXT
+          not_null(views) INTEGER
+  }
+
+  table(post_author) {
+          primary_key(unique(id)) INTEGER
+          not_null(name)  VARCHAR[24]
+          not_null(password)  VARCHAR[24]
+  }
+
+  post -[hidden] post_author
+  post::post_author_id --> post_author::id
+  post::post_author_name --> post_author::name
+
+  note top of post
+  post
+  end note
+  note top of post_author
+  Author of each post 
+  end note
+
+  @enduml
+#+end_src
+
+#+RESULTS:
+[[file:erd.png]]
