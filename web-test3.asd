@@ -10,7 +10,9 @@
   :components ((:module "src"
                 :components
                 ((:file "package")
-                 (:file "main" :depends-on ("db"))
+                 (:file "main" :depends-on ("db" "post" "author"))
+                 (:file "post" :depends-on ("db"))
+                 (:file "author" :depends-on ("db"))
                  (:file "db"))))
   :description ""
   :in-order-to ((test-op (test-op "web-test3/tests"))))
