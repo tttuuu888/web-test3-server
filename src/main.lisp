@@ -44,7 +44,7 @@
 (easy-routes:defroute add-user ("/add-user" :method :post
                                             :decorators (easy-routes:@json))
     (&post auth-data)
-  (let* ((data-string (raw-post-data :force-text t))
+  (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (auth (st-json:getjso "auth" json))
          (id (st-json:getjso "id" auth))
@@ -58,17 +58,13 @@
   (db-init)
   (format t "web test project3~%")
   (setf *custom-reply* (make-instance 'hunchentoot:reply))
-  ;; (setf  (slot-value *custom-reply* 'headers-out)
-  ;;        (append  (slot-value *custom-reply* 'headers-out) '((:foo . "bar"))))
-
-  (setf (headers-out *custom-reply*)
-        (append  (headers-out *custom-reply*)
+  (setf (hunchentoot:header-out :headers *custom-reply*)
+        (append  (hunchentoot:header-out :headers *custom-reply*)
                  '((:access-control-allow-origin . "*"))))
   (setf *server*
         (make-instance 'easy-routes:routes-acceptor
                        :port 4242
-                       :reply-class *custom-reply*
-                       :document-root "./html/"))
+                       :reply-class *custom-reply*))
 
   (start *server*)
 

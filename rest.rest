@@ -13,6 +13,8 @@ GET :host/test?word=tmp1&tmp=tmp2
 POST :host/add-user
 Content-Type: application/json
 {
-    "id": "test-id",
-    "pw": "test-password",
+    "auth": {
+        "id": "test-id",
+        "pw": "test-password",
+    }
 }
