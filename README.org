@@ -36,24 +36,27 @@
           email       VARCHAR(64)
           password    VARCHAR(24)
   }
+
   table(post) {
           id                  INTEGER
           ..
-          post_author_id      INTEGER
+          user_id             INTEGER
           title               VARCHAR(128)
           content             TEXT
           views               INTEGER
   }
 
-  table(post_author) {
-          id          INTEGER
-          ..
-          name        VARCHAR(24)
-          password    VARCHAR(24)
-  }
+  /'
+   ' table(post_author) {
+   '         id          INTEGER
+   '         ..
+   '         name        VARCHAR(24)
+   '         password    VARCHAR(24)
+   ' }
+   '/
 
-  post -[hidden] post_author
-  post::post_author_id --> post_author::id
+  post -[hidden] user
+  post::user_id --> user::id
 
   note top of post
   post

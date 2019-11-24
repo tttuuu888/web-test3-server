@@ -4,7 +4,7 @@
 GET :host
 
 # test 
-GET :host/test
+GET :host/test2
 
 # test 
 GET :host/test?word=tmp1&tmp=tmp2
