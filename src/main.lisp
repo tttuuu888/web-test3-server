@@ -1,23 +1,21 @@
 (in-package :web-test3)
 
 (defvar *server*)
-(defvar *custom-reply*)
 
 (defun test2 ()
   (format t "test2~%")
   (db-test))
 
+(defun test (word)
+  (format t "test word ~a" word))
+
 (defun test ()
-  (test2)
-  (format t "test function"))
+  (format t "test word"))
 
-;; (define-easy-handler (test :uri "/test") (word tmp)
-;;   (setf (content-type*) "text/plain")
-;;   (format nil "Test world : ~a, tmp: ~a" word tmp))
-
-;; (define-easy-handler (test :uri "/test2") (word tmp)
-;;   (setf (content-type*) "text/plain")
-;;   (format nil "Test world : ~a, tmp: ~a" word tmp))
+;; (hunchentoot:define-easy-handler (test :uri "/test") (word)
+;;   (setf (hunchentoot:content-type*) "text/plain")
+;;   (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
+;;   (format nil "word: ~a" word))
 
 ;; (define-easy-handler (add-user :uri "/add-user") ()
 ;;   (setf (content-type*) "text/plain")
@@ -31,15 +29,18 @@
 ;;                      (st-json:getjso "id" json)
 ;;                      (st-json:getjso "pw" json)))))))
 
-(easy-routes:defroute test ("/test" :method :get
-                                    :decorators (easy-routes:@html) )
-    ()
-  (format nil "test test test"))
 
 (easy-routes:defroute test2 ("/test2" :method :get
                                       :decorators (easy-routes:@html))
     (&get word tmp)
+  (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
   (format nil "Test word : ~a, tmp: ~a" word tmp))
+
+(easy-routes:defroute test3 ("/test3" :method :get
+                                    :decorators (easy-routes:@html) )
+    ()
+  (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
+  (format nil "test test test"))
 
 (easy-routes:defroute add-user ("/add-user" :method :post
                                             :decorators (easy-routes:@json))
@@ -49,6 +50,7 @@
          (auth (st-json:getjso "auth" json))
          (id (st-json:getjso "id" auth))
          (pw (st-json:getjso "pw" auth)))
+    (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
     (format t "id : ~a, pw : ~a~%" id pw)
     (format nil "id : ~a, pw : ~a" id pw)))
 
@@ -57,14 +59,10 @@
   (declare (ignore tmp))
   (db-init)
   (format t "web test project3~%")
-  (setf *custom-reply* (make-instance 'hunchentoot:reply))
-  (setf (hunchentoot:header-out :headers *custom-reply*)
-        (append  (hunchentoot:header-out :headers *custom-reply*)
-                 '((:access-control-allow-origin . "*"))))
   (setf *server*
-        (make-instance 'easy-routes:routes-acceptor
-                       :port 4242
-                       :reply-class *custom-reply*))
+        (make-instance
+         'easy-routes:routes-acceptor
+         :port 4242))
 
   (start *server*)
 
