@@ -4,8 +4,10 @@
   :license ""
   :depends-on ("vecto"
                "hunchentoot"
+               "easy-routes"
                "trivia"
                "mito"
+               "st-json"
                "iterate")
   :components ((:module "src"
                 :components
