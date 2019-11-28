@@ -15,3 +15,7 @@ Content-Type: application/json
         "pw": "test-password",
     }
 }
+
+
+# list
+GET :host/list

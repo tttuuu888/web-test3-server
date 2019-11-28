@@ -1,6 +1,13 @@
 (in-package :web-test3)
 
+(defvar *dev-mode* t)
 (defvar *server*)
+
+(defun dev-allow-origin ()
+  (when *dev-mode*
+    (setf (hunchentoot:header-out
+           :Access-Control-Allow-Origin hunchentoot:*reply*)
+          "*")))
 
 (defun test2 ()
   (format t "test2~%")
@@ -33,7 +40,6 @@
 (easy-routes:defroute test2 ("/test2" :method :get
                                       :decorators (easy-routes:@html))
     (&get word tmp)
-  (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
   (format nil "Test word : ~a, tmp: ~a" word tmp))
 
 (easy-routes:defroute test3 ("/test3" :method :get
@@ -50,9 +56,18 @@
          (auth (st-json:getjso "auth" json))
          (id (st-json:getjso "id" auth))
          (pw (st-json:getjso "pw" auth)))
-    (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
+    (dev-allow-origin)
     (format t "id : ~a, pw : ~a~%" id pw)
     (format nil "id : ~a, pw : ~a" id pw)))
+
+
+(easy-routes:defroute test3 ("/list" :method :get
+                                     :decorators (easy-routes:@json))
+    (&get page)
+  (dev-allow-origin)
+  (let ((json (st-json:read-json-from-string "{}")))
+    (setf (st-json:getjso "list" json)  '("title1" "title2" "title3"))
+    (st-json:write-json-to-string json)))
 
 
 (defun main (&optional tmp)
