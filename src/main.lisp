@@ -50,9 +50,12 @@
          'easy-routes:routes-acceptor
          :port 4242))
 
-  (start *server*)
+  (hunchentoot:start *server*)
 
   ;; for executable
   ;; (loop (sleep 10))
 
   )
+
+(defun stop-server ()
+  (hunchentoot:stop *server*))
