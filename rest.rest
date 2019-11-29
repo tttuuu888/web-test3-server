@@ -19,3 +19,11 @@ Content-Type: application/json
 
 # list
 GET :host/list
+
+
+# list page 1
+GET :host/list?page=1
+
+
+# list page 2
+GET :host/list?page=2
