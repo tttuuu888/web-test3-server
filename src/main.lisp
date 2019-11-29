@@ -36,11 +36,9 @@
 
 (easy-routes:defroute test3 ("/list" :method :get
                                      :decorators (easy-routes:@json))
-    (&get page)
+  (&get page)
   (dev-allow-origin)
-  (let ((json (st-json:read-json-from-string "{}")))
-    (setf (st-json:getjso "list" json)  '("title1" "title2" "title3"))
-    (st-json:write-json-to-string json)))
+  (get-post-list page))
 
 
 (defun main (&optional tmp)
