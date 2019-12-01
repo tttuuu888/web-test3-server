@@ -12,7 +12,8 @@
   :components ((:module "src"
                 :components
                 ((:file "package")
-                 (:file "main" :depends-on ("db" "post" "author"))
+                 (:file "main" :depends-on ("db" "routes"))
+                 (:file "routes" :depends-on ("post" "author"))
                  (:file "post" :depends-on ("db"))
                  (:file "author" :depends-on ("db"))
                  (:file "db"))))

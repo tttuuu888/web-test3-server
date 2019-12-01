@@ -4,23 +4,25 @@
 ** Installation
 
 * Site map
-|   | Depth 1      | Depth 2             | Depth 3       |
-|---+--------------+---------------------+---------------|
-|   | (main page)  | (post)              | (delete post) |
-|   | post list    | title               | password      |
-|   | pagenation   | author              | commit        |
-|   | write button | content             | cancel        |
-|   |              | delete button       |               |
-|   |              | back to list button |               |
-|---+--------------+---------------------+---------------|
-|   |              | (write post)        |               |
-|   |              | author name         |               |
-|   |              | author pasword      |               |
-|   |              | title               |               |
-|   |              | content             |               |
-|   |              | commit button       |               |
-|   |              | cancel button       |               |
-|---+--------------+---------------------+---------------|
+|   | Depth 1              | Depth 2             | Depth 3       |
+|---+----------------------+---------------------+---------------|
+|   | (main page)          | (post)              | (delete post) |
+|   | post list            | title               | password      |
+|   | pagenation           | author              | commit        |
+|   |                      | content             | cancel        |
+|   | id,pw,login button   | delete button       |               |
+|   | - when not logged in | back to list button |               |
+|   | write button         |                     |               |
+|   | - when logged in     |                     |               |
+|---+----------------------+---------------------+---------------|
+|   |                      | (write post)        |               |
+|   |                      | author name         |               |
+|   |                      | author pasword      |               |
+|   |                      | title               |               |
+|   |                      | content             |               |
+|   |                      | commit button       |               |
+|   |                      | cancel button       |               |
+|---+----------------------+---------------------+---------------|
 * ERD
 #+begin_src plantuml :file erd.png
   @startuml
