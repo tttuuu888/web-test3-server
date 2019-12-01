@@ -35,6 +35,7 @@
           id          INTEGER
           ..
           name        VARCHAR(24)
+          nick_name   VARCHAR(24)
           email       VARCHAR(64)
           password    VARCHAR(24)
   }
@@ -43,9 +44,9 @@
           id                  INTEGER
           ..
           user_id             INTEGER
+          user_nickname       VARCHAR(24)
           title               VARCHAR(128)
           content             TEXT
-          views               INTEGER
   }
 
   /'

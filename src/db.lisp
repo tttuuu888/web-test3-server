@@ -1,15 +1,17 @@
 (in-package :web-test3)
 
 (mito:deftable user ()
-  ((id :col-type (:varchar 32) :primary-key t)
-   (name :col-type (:varchar 32))
+  ((id :col-type (:varchar 24) :primary-key t)
+   (name :col-type (:varchar 24))
+   (nickname :col-type (:varchar 24))
    (email :col-type (:varchar 64))
-   (password :col-type (:varchar 32))))
+   (password :col-type (:varchar 24))))
 
 (mito:deftable post ()
   ((title :col-type (:varchar 128))
-   (content :col-type (:varchar 1024))
-   (author :col-type user)))
+   (content :col-type :text)
+   (author :col-type user)
+   (author-nickname :col-type (:varchar 24))))
 
 (defun db-init ()
   (format t "db-init~%")
@@ -35,15 +37,6 @@
 
 (defun user-find (id)
   (mito:find-dao 'user :id id))
-
-(defvar *sample-post-list*
-  '("title test 1"
-    "title test 2"
-    "Another title"
-    "Yet another title"))
-
-(defun get-post-list (&optional page)
-  *sample-post-list*)
 
 (defun add-post (&key title content author)
   (mito:create-dao 'post :title title :content content :author author))
