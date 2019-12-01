@@ -14,8 +14,21 @@ POST :host/add-user
 Content-Type: application/json
 {
     "auth": {
+        "id": "test-id2",
+        "name": "test-name",
+        "nickname": "test-nickname",
+        "email": "test-email@mail.com2",
+        "password": "test-password",
+    }
+}
+
+# login user
+POST :host/login-user
+Content-Type: application/json
+{
+    "auth": {
         "id": "test-id",
-        "pw": "test-password",
+        "password": "test-password",
     }
 }
 

@@ -24,10 +24,14 @@
 (defun db-user-duplicate-t (id email)
   (or (mito:find-dao 'user :id id) (mito:find-dao 'user :email email)))
 
-(defun db-user-add (id name email password)
-  (if (user-duplicate-t :id id :email email)
+(defun db-user-add (id name nickname email password)
+  (if (db-user-duplicate-t id email)
       'exists
-      (mito:create-dao 'user :id id :name name :email email :password password)))
+      (mito:create-dao 'user :id id
+                             :name name
+                             :nickname nickname
+                             :email email
+                             :password password)))
 
 (defun db-user-remove (id)
   (let ((user (mito:find-dao 'user :id id)))

@@ -32,12 +32,19 @@
                                             :decorators (easy-routes:@json))
   (&post auth-data)
   (let* ((data-string (hunchentoot:raw-post-data :force-text t))
+         (json (st-json:read-json-from-string data-string)))
+    (dev-allow-origin)
+    (user-add json)))
+
+(easy-routes:defroute login-user ("/login-user" :method :post
+                                            :decorators (easy-routes:@json))
+  (&post auth-data)
+  (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (id (st-json:getjso* "auth.id" json))
          (pw (st-json:getjso* "auth.pw" json)))
     (dev-allow-origin)
-    (format t "id : ~a, pw : ~a~%" id pw)
-    (format nil "id : ~a, pw : ~a" id pw)))
+    (user-login id pw)))
 
 
 (easy-routes:defroute test3 ("/list" :method :get
