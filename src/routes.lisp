@@ -21,6 +21,13 @@
   (setf (hunchentoot:header-out :Access-Control-Allow-Origin hunchentoot:*reply*) "*")
   (format nil "test test test"))
 
+
+(easy-routes:defroute test2 ("/jsontest" :method :get
+                                         :decorators (easy-routes:@json))
+  ()
+  (dev-allow-origin)
+  (make-error-json "user-not-exits"))
+
 (easy-routes:defroute add-user ("/add-user" :method :post
                                             :decorators (easy-routes:@json))
   (&post auth-data)

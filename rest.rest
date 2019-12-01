@@ -6,6 +6,9 @@ GET :host
 # test 
 GET :host/test2?word=tmp1&tmp=tmp2
 
+# json test
+GET :host/jsontest
+
 # add user
 POST :host/add-user
 Content-Type: application/json
