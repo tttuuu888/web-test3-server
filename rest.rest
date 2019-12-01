@@ -23,7 +23,17 @@ Content-Type: application/json
 }
 
 # login user
-POST :host/login-user
+POST :host/user/login
+Content-Type: application/json
+{
+    "auth": {
+        "id": "test-id",
+        "password": "test-password",
+    }
+}
+
+# logout user
+POST :host/user/logout
 Content-Type: application/json
 {
     "auth": {
@@ -34,12 +44,12 @@ Content-Type: application/json
 
 
 # list
-GET :host/list
+GET :host/
 
 
 # list page 1
-GET :host/list?page=1
+GET :host/?page=1
 
 
 # list page 2
-GET :host/list?page=2
+GET :host/?page=2

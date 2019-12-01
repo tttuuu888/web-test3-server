@@ -4,6 +4,7 @@
   :license ""
   :depends-on ("vecto"
                "hunchentoot"
+               "hunchentoot-auth"
                "easy-routes"
                "trivia"
                "mito"

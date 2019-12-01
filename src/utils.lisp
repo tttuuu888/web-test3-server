@@ -11,8 +11,7 @@
           for v = value
           while k
           do
-             (format t "a:~a, b:~a" k v)
-             (setf (st-json:getjso (string k) json) v)
+             (setf (st-json:getjso (string-downcase k) json) v)
              (setf key   (pop pairs)
                    value (pop pairs)))
     json))

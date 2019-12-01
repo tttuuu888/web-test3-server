@@ -37,7 +37,7 @@
         (test-post-list))))
 
 
-(defun write-post (user-id title content)
+(defun write-post (user-id nickname title content)
   (let ((user (user-find user-id)))
     (if (not user)
         (make-error-json "user-not-exists")
