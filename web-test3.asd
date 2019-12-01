@@ -13,10 +13,12 @@
                 :components
                 ((:file "package")
                  (:file "main" :depends-on ("db" "routes"))
-                 (:file "routes" :depends-on ("post" "author"))
-                 (:file "post" :depends-on ("db"))
-                 (:file "author" :depends-on ("db"))
-                 (:file "db"))))
+                 (:file "routes" :depends-on ("post" "user" "utils"))
+                 (:file "post" :depends-on ("db" "utils"))
+                 (:file "user" :depends-on ("db" "utils"))
+                 (:file "db")
+                 (:file "utils")
+                 )))
   :description ""
   :in-order-to ((test-op (test-op "web-test3/tests"))))
 

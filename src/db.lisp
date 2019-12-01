@@ -21,24 +21,24 @@
   (mito:ensure-table-exists 'user)
   (mito:ensure-table-exists 'post))
 
-(defun user-duplicate-t (&key id email)
+(defun db-user-duplicate-t (id email)
   (or (mito:find-dao 'user :id id) (mito:find-dao 'user :email email)))
 
-(defun user-add (&key id name email password)
+(defun db-user-add (id name email password)
   (if (user-duplicate-t :id id :email email)
       'exists
       (mito:create-dao 'user :id id :name name :email email :password password)))
 
-(defun user-remove (&key id)
+(defun db-user-remove (id)
   (let ((user (mito:find-dao 'user :id id)))
     (if (not user)
         'not-exists
         (mito:delete-dao user))))
 
-(defun user-find (id)
+(defun db-user-find (id)
   (mito:find-dao 'user :id id))
 
-(defun add-post (&key title content author)
+(defun db-add-post (title content author)
   (mito:create-dao 'post :title title :content content :author author))
 
 (defun db-test ()
