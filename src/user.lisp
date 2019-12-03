@@ -1,5 +1,12 @@
 (in-package :web-test3)
 
+(defun user-exists-p (id email)
+  (format t "user id ~a email ~a~%" id email)
+  (if (db-user-duplicate-t id email)
+      (make-error-json "user-already-exists")
+      (st-json:write-json-to-string
+       (make-json :status "success"))))
+
 (defun user-add (json)
   (let ((id (st-json:getjso "id" json))
         (password (st-json:getjso "password" json))
@@ -13,8 +20,8 @@
           (db-user-add id name nickname email password)
           (st-json:write-json-to-string
            (make-json :user
-                      (make-json :id "testid"
-                                 :nickname "test-nick")))))))
+                      (make-json :id id
+                                 :nickname nickname)))))))
 
 (defun user-login (json)
   (let ((id (st-json:getjso "id" json))

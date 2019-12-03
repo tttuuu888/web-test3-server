@@ -10,14 +10,14 @@ GET :host/test2?word=tmp1&tmp=tmp2
 GET :host/jsontest
 
 # add user
-POST :host/add-user
+POST :host/user/add
 Content-Type: application/json
 {
     "auth": {
-        "id": "test-id2",
+        "id": "test-id3",
         "name": "test-name",
         "nickname": "test-nickname",
-        "email": "test-email@mail.com2",
+        "email": "test-email@mail.com3",
         "password": "test-password",
     }
 }

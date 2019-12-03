@@ -35,7 +35,15 @@
                                          :decorators (easy-routes:@json))
     ()
   (dev-allow-origin)
+  ;; (setf (hunchentoot:session-value 'test) "tptp")
+  ;; (format t "session : ~a~%" (hunchentoot:session-value 'test))
   (make-error-json "user-not-exits"))
+
+(easy-routes:defroute check-user ("/user/exists-p" :method :get
+                                                 :decorators (easy-routes:@html))
+    (&get id email)
+  (dev-allow-origin)
+  (user-exists-p id email))
 
 (easy-routes:defroute add-user ("/user/add" :method :post
                                             :decorators (easy-routes:@json))
