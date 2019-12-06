@@ -47,7 +47,7 @@
     (st-json:write-json-to-string json)))
 
 
-  (defun write-post (user-id title content)
+(defun write-post (user-id title content)
   (let ((user (db-user-find user-id)))
     (format t "id : ~a title : ~a content : ~a~%" user-id title content)
     (if (not user)
@@ -56,3 +56,11 @@
           (st-json:write-json-to-string
            (make-json :status "success"
                       :postid post-id))))))
+
+(defun get-post (post-id)
+  (let ((json (st-json:read-json-from-string "{}"))
+        (post (db-post-find post-id)))
+    (setf (st-json:getjso "title" json) (slot-value post 'title))
+    (setf (st-json:getjso "content" json) (slot-value post 'content))
+    (setf (st-json:getjso "nickname" json) (slot-value post 'author-nickname))
+    (st-json:write-json-to-string json)))

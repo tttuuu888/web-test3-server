@@ -96,6 +96,14 @@
     (dev-allow-origin)
     (write-post user-id title content)))
 
+
+(easy-routes:defroute postid ("/post" :method :get
+                                      :decorators (easy-routes:@json))
+    (&get postid)
+  (format t "post id : ~a~%" postid)
+  (dev-allow-origin)
+  (get-post postid))
+
 (easy-routes:defroute home ("/" :method :get
                                 :decorators (easy-routes:@json))
     (&get page)
@@ -103,7 +111,7 @@
   (get-post-list page))
 
 (easy-routes:defroute home2 ("/list" :method :get
-                                :decorators (easy-routes:@json))
+                                     :decorators (easy-routes:@json))
     (&get page)
   (dev-allow-origin)
   (get-post-list page))

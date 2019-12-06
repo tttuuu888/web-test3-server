@@ -42,6 +42,9 @@
 (defun db-user-find (id)
   (mito:find-dao 'user :id id))
 
+(defun db-post-find (id)
+  (mito:find-dao 'post :id id))
+
 (defun db-add-post (title content author)
   "add post"
   (let ((post

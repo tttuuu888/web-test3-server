@@ -51,6 +51,8 @@ Content-Type: application/json
     "content": "new 22",
 }
 
+# get post 
+GET :host/post?postid=15
 
 # list
 GET :host/
