@@ -14,10 +14,10 @@ POST :host/user/add
 Content-Type: application/json
 {
     "auth": {
-        "id": "test-id3",
+        "id": "test-id37",
+        "email": "test-email@mail.com37",
         "name": "test-name",
         "nickname": "test-nickname",
-        "email": "test-email@mail.com3",
         "password": "test-password",
     }
 }
@@ -40,6 +40,15 @@ Content-Type: application/json
         "id": "test-id",
         "password": "test-password",
     }
+}
+
+# logout user
+POST :host/user/writepost
+Content-Type: application/json
+{
+    "id": "1",
+    "title": "new 11",
+    "content": "new 22",
 }
 
 

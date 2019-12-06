@@ -15,6 +15,10 @@
 ;;         (funcall next))))
 
 (defun test () (format t "test word"))
+(defun test2 (word) (concatenate 'string "tptp : " word))
+(defun test3 (word)
+  (format t "test word ~a~%" (test2 word))
+  word)
 
 (easy-routes:defroute test2 ("/test2" :method :get
                                       :decorators (easy-routes:@html))
@@ -79,6 +83,18 @@
     (if auth
         (user-logout auth)
         (make-error-json "wrong-format"))))
+
+(easy-routes:defroute writepost-user ("/user/writepost" :method :post
+                                                        :decorators (easy-routes:@json))
+    (&post auth-data)
+  (let* ((data-string (hunchentoot:raw-post-data :force-text t))
+         (json (st-json:read-json-from-string data-string))
+         (user-id (st-json:getjso "id" json))
+         (title (st-json:getjso "title" json))
+         (content (st-json:getjso "content" json)))
+    (format t "json ~a~%" json)
+    (dev-allow-origin)
+    (write-post user-id title content)))
 
 (easy-routes:defroute home ("/" :method :get
                                 :decorators (easy-routes:@json))

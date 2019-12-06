@@ -43,7 +43,18 @@
   (mito:find-dao 'user :id id))
 
 (defun db-add-post (title content author)
-  (mito:create-dao 'post :title title :content content :author author))
+  "add post"
+  (let ((post
+          (mito:create-dao 'post :title title
+                                 :content content
+                                 :author author
+                                 :author-nickname (slot-value author
+                                                              'nickname))))
+    (mito:object-id post)))
+
+;; select * from post order by timestamp desc limit 20
+(defun db-read-recent-post-list ()
+  (mito:select-dao 'post (sxql:order-by (:desc :created-at)) (sxql:limit 20)))
 
 (defun db-test ()
   (format t "db test"))
