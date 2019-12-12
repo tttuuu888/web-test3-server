@@ -51,7 +51,7 @@
 
 (easy-routes:defroute add-user ("/user/add" :method :post
                                             :decorators (easy-routes:@json))
-    (&post auth-data)
+    ()
   (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (auth (st-json:getjso "auth" json)))
@@ -62,11 +62,10 @@
 
 (easy-routes:defroute login-user ("/user/login" :method :post
                                                 :decorators (easy-routes:@json))
-    (&post auth-data)
+    ()
   (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (auth (st-json:getjso "auth" json)))
-    ;; (format t "?? auth data ~a~%" auth-data)
     (dev-allow-origin)
     (if auth
         (user-login auth)
@@ -74,8 +73,7 @@
 
 (easy-routes:defroute logout-user ("/user/logout" :method :post
                                                   :decorators (easy-routes:@json))
-    (&post auth-data)
-  ;; (format t "?? auth data ~a~%" auth-data)
+    ()
   (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (auth (st-json:getjso "auth" json)))
@@ -86,7 +84,7 @@
 
 (easy-routes:defroute writepost-user ("/user/writepost" :method :post
                                                         :decorators (easy-routes:@json))
-    (&post auth-data)
+    ()
   (let* ((data-string (hunchentoot:raw-post-data :force-text t))
          (json (st-json:read-json-from-string data-string))
          (user-id (st-json:getjso "id" json))
@@ -122,3 +120,9 @@
     ()
   (dev-allow-origin)
   (format nil "You are logged out."))
+
+(easy-routes:defroute tptp ("/tp/:x/:xx" :method :get
+                                     :decorators (easy-routes:@html))
+    (y &get z)
+  (dev-allow-origin)
+  (format t "x: ~a, xx: ~a, y: ~a, z: ~a," x xx y z))
