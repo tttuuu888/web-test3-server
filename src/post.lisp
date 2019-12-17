@@ -1,11 +1,10 @@
 (in-package :web-test3)
 
 (defun make-post-json (id title nickname)
-  (let ((json (st-json:jso)))
-    (setf (st-json:getjso "id" json) id)
-    (setf (st-json:getjso "title" json) title)
-    (setf (st-json:getjso "nickname" json) nickname)
-    json))
+  (st-json:jso
+   "id" id
+   "title" title
+   "nickname" nickname))
 
 (defun test-post-list ()
   (let ((json (st-json:jso)))
@@ -58,9 +57,10 @@
                       :postid post-id))))))
 
 (defun get-post (post-id)
-  (let ((json (st-json:jso))
-        (post (db-post-find post-id)))
-    (setf (st-json:getjso "title" json) (slot-value post 'title))
-    (setf (st-json:getjso "content" json) (slot-value post 'content))
-    (setf (st-json:getjso "nickname" json) (slot-value post 'author-nickname))
-    (st-json:write-json-to-string json)))
+  (let ((post (db-post-find post-id)))
+    (with-slots (title content author-nickname) post
+      (st-json:write-json-to-string
+       (st-json:jso
+        "title" title
+        "content" content
+        "nickname" author-nickname)))))
