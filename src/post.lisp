@@ -1,14 +1,14 @@
 (in-package :web-test3)
 
 (defun make-post-json (id title nickname)
-  (let ((json (st-json:read-json-from-string "{}")))
+  (let ((json (st-json:jso)))
     (setf (st-json:getjso "id" json) id)
     (setf (st-json:getjso "title" json) title)
     (setf (st-json:getjso "nickname" json) nickname)
     json))
 
 (defun test-post-list ()
-  (let ((json (st-json:read-json-from-string "{}")))
+  (let ((json (st-json:jso)))
     (setf (st-json:getjso "list" json)
           (list (make-post-json 3 "title3" "aur1")
                 (make-post-json 2 "title2" "aur1")
@@ -19,7 +19,7 @@
 
 
 (defun test-post-list2 ()
-  (let ((json (st-json:read-json-from-string "{}")))
+  (let ((json (st-json:jso)))
     (setf (st-json:getjso "list" json)
           (list (make-post-json 3 "title11223" "author1")
                 (make-post-json 2 "title11222" "author2")
@@ -32,7 +32,7 @@
 
 (defun get-post-list (&optional page)
   "Return a list of post titles."
-  (let* ((json (st-json:read-json-from-string "{}"))
+  (let* ((json (st-json:jso))
          (p (if (not page) 1 (parse-integer page)))
          (post-list (db-read-recent-post-list)))
     (format t "page : ~a" p)
@@ -58,7 +58,7 @@
                       :postid post-id))))))
 
 (defun get-post (post-id)
-  (let ((json (st-json:read-json-from-string "{}"))
+  (let ((json (st-json:jso))
         (post (db-post-find post-id)))
     (setf (st-json:getjso "title" json) (slot-value post 'title))
     (setf (st-json:getjso "content" json) (slot-value post 'content))
