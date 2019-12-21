@@ -32,11 +32,16 @@
 (defun get-post-list (&optional page)
   "Return a list of post titles."
   (let* ((json (st-json:jso))
-         (p (if (not page) 1 (parse-integer page)))
-         (post-list (db-read-recent-post-list)))
+         (p (if (not page)
+                1
+                (if (stringp page)
+                    (parse-integer page)
+                    page)))
+         (total-page-count (db-total-page-count))
+         (post-list (db-read-post-of-page p)))
     (format t "page : ~a" p)
-    (setf (st-json:getjso "totalPage" json) 20)
-    (setf (st-json:getjso "currentPage" json) 1)
+    (setf (st-json:getjso "totalPage" json) total-page-count)
+    (setf (st-json:getjso "currentPage" json) p)
     (setf (st-json:getjso "list" json)
           (mapcar (lambda (x) (make-post-json
                                (mito:object-id x)

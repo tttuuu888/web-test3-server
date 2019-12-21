@@ -1,5 +1,7 @@
 (in-package :web-test3)
 
+(defvar *post-per-page* 5)
+
 (mito:deftable user ()
   ((id :col-type (:varchar 24) :primary-key t)
    (name :col-type (:varchar 24))
@@ -58,6 +60,21 @@
 ;; select * from post order by timestamp desc limit 20
 (defun db-read-recent-post-list ()
   (mito:select-dao 'post (sxql:order-by (:desc :created-at)) (sxql:limit 20)))
+
+(defun db-read-post-of-page (page)
+  (mito:select-dao 'post
+    (sxql:order-by (:desc :created-at))
+    (sxql:limit *post-per-page*)
+    (sxql:offset (* (1- page) *post-per-page*))))
+
+(defun db-total-page-count ()
+  (multiple-value-bind (a b) (floor (mito:count-dao 'post) *post-per-page*)
+    (if (equal b 0)
+        a
+        (1+ a)))
+
+
+)
 
 (defun db-test ()
   (format t "db test"))
