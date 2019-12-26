@@ -74,7 +74,8 @@
 #+RESULTS:
 [[file:erd.png]]
 * Todos
-** TODO Pagination
+** DONE Pagination
+CLOSED: [2019-12-22 Sun 22:57]
 ** TODO Search post with title
 ** TODO Search post with author
 ** TODO Check my posts

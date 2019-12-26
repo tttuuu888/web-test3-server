@@ -63,9 +63,10 @@
 
 (defun get-post (post-id)
   (let ((post (db-post-find post-id)))
-    (with-slots (title content author-nickname) post
+    (with-slots (title content author-id author-nickname) post
       (st-json:write-json-to-string
        (st-json:jso
         "title" title
         "content" content
+        "author" author-id
         "nickname" author-nickname)))))
