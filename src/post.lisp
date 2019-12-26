@@ -16,19 +16,6 @@
     (setf (st-json:getjso "currentPage" json) 1)
     (st-json:write-json-to-string json)))
 
-
-(defun test-post-list2 ()
-  (let ((json (st-json:jso)))
-    (setf (st-json:getjso "list" json)
-          (list (make-post-json 3 "title11223" "author1")
-                (make-post-json 2 "title11222" "author2")
-                (make-post-json 1 "title11221" "author1")))
-    (setf (st-json:getjso "totalPage" json) 20)
-    (setf (st-json:getjso "currentPage" json) 1)
-    (st-json:write-json-to-string json)))
-
-
-
 (defun get-post-list (&optional page)
   "Return a list of post titles."
   (let* ((json (st-json:jso))
