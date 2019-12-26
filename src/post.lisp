@@ -57,3 +57,12 @@
         "content" content
         "author" author-id
         "nickname" author-nickname)))))
+
+(defun delete-post (post-id)
+  (let ((post (db-post-find post-id)))
+    (if (not post)
+        (make-error-json "post-not-exists")
+        (progn
+          (db-post-remove post)
+          (st-json:write-json-to-string
+           (make-json :status "success"))))))

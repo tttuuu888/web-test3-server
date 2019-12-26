@@ -102,6 +102,13 @@
   (dev-allow-origin)
   (get-post postid))
 
+(easy-routes:defroute post-delete ("/post/delete" :method :get
+                                                  :decorators (easy-routes:@json))
+    (&get postid)
+  (format t "post id : ~a~%" postid)
+  (dev-allow-origin)
+  (delete-post postid))
+
 (easy-routes:defroute home ("/" :method :get
                                 :decorators (easy-routes:@json))
     (&get page)

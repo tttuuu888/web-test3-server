@@ -57,6 +57,9 @@
                                                               'nickname))))
     (mito:object-id post)))
 
+(defun db-post-remove (post)
+  (mito:delete-dao post))
+
 ;; select * from post order by timestamp desc limit 20
 (defun db-read-recent-post-list ()
   (mito:select-dao 'post (sxql:order-by (:desc :created-at)) (sxql:limit 20)))

@@ -54,6 +54,9 @@ Content-Type: application/json
 # get post 
 GET :host/post?postid=15
 
+# delete post
+GET :host/post/delete?postid=26
+
 # list
 GET :host/
 
