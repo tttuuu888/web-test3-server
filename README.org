@@ -78,6 +78,9 @@
 CLOSED: [2019-12-22 Sun 22:57]
 ** TODO Search post with title
 ** TODO Search post with author
+** DONE Delete post
+CLOSED: [2019-12-27 Fri 05:52]
+** TODO Delete post after login session check
 ** TODO Check my posts
 ** TODO Change user password
 ** TODO Reply system
