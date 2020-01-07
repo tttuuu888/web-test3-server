@@ -68,18 +68,19 @@
   @enduml
 #+end_src
 
-#+ATTR_HTML:
-[[./erd.png]]
+#+RESULTS:
+[[file:erd.png]]
+
 * Todos
-- DONE Pagination
-  [2019-12-22 Sun 22:57]
-- TODO Search post with title
-- TODO Search post with author
-- DONE Delete post
-  [2019-12-27 Fri 05:52]
-- TODO Delete post after login session check
-- TODO Check my posts
-- TODO Change user password
-- TODO Reply system
-- TODO Deploy
-- TODO Save encrypted password
+** DONE Pagination
+CLOSED: [2019-12-22 Sun 15:51]
+** TODO Search post with title
+** TODO Search post with author
+** DONE Delete post
+CLOSED: [2019-12-27 Fri 15:52]
+** TODO Delete post after login session check
+** TODO Check my posts
+** TODO Change user password
+** TODO Reply system
+** TODO Deploy
+** TODO Save encrypted password
