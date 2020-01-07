@@ -3,6 +3,23 @@
 
 ** Installation
 
+** Running
+
+*** Server
+Run for development
+: $ sbcl
+
+#+begin_src lisp
+(ql:quickload :web-test3)
+
+(in-package :web-test3)
+
+(main)
+#+end_src
+
+*** Client
+: $ cd web-test3-client
+: $ yarn serve
 * Site map
 |   | Depth 1              | Depth 2             | Depth 3       |
 |---+----------------------+---------------------+---------------|
@@ -64,9 +81,11 @@
   note top of post
   post
   end note
-  note top of post_author
-  Author of each post
-  end note
+  /'
+   ' note top of post_author
+   ' Author of each post
+   ' end note
+   '/
 
   @enduml
 #+end_src
@@ -84,3 +103,5 @@ CLOSED: [2019-12-27 Fri 05:52]
 ** TODO Check my posts
 ** TODO Change user password
 ** TODO Reply system
+** TODO Deploy
+** TODO Save encrypted password
