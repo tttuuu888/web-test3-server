@@ -1,7 +1,10 @@
 * Web-Test3 
-** Usage
+** About
+Simple bulletin board test project
 
-** Installation
+** Obtaining
+: $ cd ~/quicklisp/local-projects
+: $ git clone --recurse-submodules https://github.com/tttuuu888/web-test3-server.git web-test3
 
 ** Running
 
