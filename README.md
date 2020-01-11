@@ -7,6 +7,8 @@ Simple bulletin board test project
 ` $ cd ~/quicklisp/local-projects `  
 ` $ git clone --recurse-submodules https://github.com/tttuuu888/web-test3-server.git web-test3 `
 
+(Client : https://github.com/tttuuu888/web-test3-client)
+
 ## Running
 
 ### Server
