@@ -74,8 +74,10 @@
 * Todos
 ** DONE Pagination
 CLOSED: [2019-12-22 Sun 15:51]
-** TODO Search post with title
-** TODO Search post with author
+** DONE Search post with title
+CLOSED: [2020-02-08 Sat 06:41]
+** DONE Search post with author
+CLOSED: [2020-02-08 Sat 06:41]
 ** DONE Delete post
 CLOSED: [2019-12-27 Fri 15:52]
 ** TODO Delete post after login session check
