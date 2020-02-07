@@ -56,6 +56,15 @@
       (sxql:where `(:or ,@qs))
       (sxql:offset (* (1- page) *post-per-page*)))))
 
+(defun db-search-post-by-author (keywords page)
+  (let* ((ks (mapcar (lambda (k) (concatenate 'string "%%" k "%%")) keywords))
+         (qs (mapcar (lambda (k) `(:like :author-nickname ,k)) ks)))
+    (mito:select-dao 'post
+      (sxql:order-by (:desc :created-at))
+      (sxql:limit *post-per-page*)
+      (sxql:where `(:or ,@qs))
+      (sxql:offset (* (1- page) *post-per-page*)))))
+
 (defun db-search-post (type keywords page)
   (let* ((ks (mapcar (lambda (k) (concatenate 'string "%%" k "%%")) keywords))
          (qs (mapcar (lambda (k) `(:like ,type ,k)) ks)))

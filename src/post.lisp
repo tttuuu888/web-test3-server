@@ -38,7 +38,7 @@
          (total-page-count 2)
          (str-ks (mapcar #'string keywords))
          (post-list (if (equal search-type "author")
-                        (db-search-post :author str-ks page)
+                        (db-search-post :author-nickname str-ks page)
                         (db-search-post :title str-ks page))))
     (format t "page : ~a post:~a" page post-list)
     (setf (st-json:getjso "totalPage" json) total-page-count)

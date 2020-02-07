@@ -73,3 +73,9 @@ GET :host/?page=2
 
 # Search
 GET :host/search/title?keywords=33&keywords=test&page=1
+
+# Search2
+GET :host/search/title?keywords=1&page=1
+
+# Search3
+GET :host/search/author?keywords=1&page=1
