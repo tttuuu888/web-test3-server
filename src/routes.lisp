@@ -111,20 +111,21 @@
 
 (easy-routes:defroute home ("/" :method :get
                                 :decorators (easy-routes:@json))
-    (&get page)
+    (&get (page :init-form 1))
   (dev-allow-origin)
   (get-post-list page))
 
 (easy-routes:defroute home2 ("/list" :method :get
                                      :decorators (easy-routes:@json))
-    (&get page)
+    (&get (page :init-form 1 :parameter-type 'integer))
   (dev-allow-origin)
   (get-post-list page))
 
 
-(easy-routes:defroute search-type7 ("/search/:search-type" :method :get
+(easy-routes:defroute search-type ("/search/:search-type" :method :get
                                        :decorators (easy-routes:@json))
-    (&get page (keywords :parameter-type 'list))
+    (&get (keywords :parameter-type 'list)
+          (page :init-form 1 :parameter-type 'integer))
   (dev-allow-origin)
   ;; (format t "search-type: ~a, keywords: ~a, page: ~a" search-type keywords page)
   (get-search-result search-type keywords page))

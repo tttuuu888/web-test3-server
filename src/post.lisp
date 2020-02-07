@@ -16,19 +16,14 @@
     (setf (st-json:getjso "currentPage" json) 1)
     (st-json:write-json-to-string json)))
 
-(defun get-post-list (&optional page)
+(defun get-post-list (page)
   "Return a list of post titles."
   (let* ((json (st-json:jso))
-         (p (if (not page)
-                1
-                (if (stringp page)
-                    (parse-integer page)
-                    page)))
          (total-page-count (db-total-page-count))
-         (post-list (db-read-post-of-page p)))
-    (format t "page : ~a" p)
+         (post-list (db-read-post-of-page page)))
+    (format t "page : ~a" page)
     (setf (st-json:getjso "totalPage" json) total-page-count)
-    (setf (st-json:getjso "currentPage" json) p)
+    (setf (st-json:getjso "currentPage" json) page)
     (setf (st-json:getjso "list" json)
           (mapcar (lambda (x) (make-post-json
                                (mito:object-id x)
@@ -37,22 +32,17 @@
                   post-list))
     (st-json:write-json-to-string json)))
 
-(defun get-search-result (search-type keywords &optional page)
+(defun get-search-result (search-type keywords page)
   "Return search result."
   (let* ((json (st-json:jso))
-         (p (if (not page)
-                1
-                (if (stringp page)
-                    (parse-integer page)
-                    page)))
          (total-page-count 2)
          (str-ks (mapcar #'string keywords))
          (post-list (if (equal search-type "author")
-                        (db-search-post :author str-ks p)
-                        (db-search-post :title str-ks p))))
-    (format t "page : ~a post:~a" p post-list)
+                        (db-search-post :author str-ks page)
+                        (db-search-post :title str-ks page))))
+    (format t "page : ~a post:~a" page post-list)
     (setf (st-json:getjso "totalPage" json) total-page-count)
-    (setf (st-json:getjso "currentPage" json) p)
+    (setf (st-json:getjso "currentPage" json) page)
     (setf (st-json:getjso "list" json)
           (mapcar (lambda (x) (make-post-json
                                (mito:object-id x)
