@@ -122,6 +122,14 @@
   (get-post-list page))
 
 
+(easy-routes:defroute search-type7 ("/search/:search-type" :method :get
+                                       :decorators (easy-routes:@json))
+    (&get page (keywords :parameter-type 'list))
+  (dev-allow-origin)
+  ;; (format t "search-type: ~a, keywords: ~a, page: ~a" search-type keywords page)
+  (get-search-result search-type keywords page))
+
+
 (easy-routes:defroute me ("/me" :method :get
                                 :decorators (easy-routes:@html))
     ()

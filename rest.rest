@@ -4,6 +4,9 @@
 GET :host
 
 # test 
+GET :host/tp/a/b?z=1
+
+# test2
 GET :host/test2?word=tmp1&tmp=tmp2
 
 # json test
@@ -67,3 +70,6 @@ GET :host/?page=1
 
 # list page 2
 GET :host/?page=2
+
+# Search
+GET :host/search/title?keywords=33&keywords=test&page=1

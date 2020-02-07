@@ -47,6 +47,25 @@
 (defun db-post-find (id)
   (mito:find-dao 'post :id id))
 
+(defun db-search-post-by-title (keywords page)
+  (let* ((ks (mapcar (lambda (k) (concatenate 'string "%%" k "%%")) keywords))
+         (qs (mapcar (lambda (k) `(:like :title ,k)) ks)))
+    (mito:select-dao 'post
+      (sxql:order-by (:desc :created-at))
+      (sxql:limit *post-per-page*)
+      (sxql:where `(:or ,@qs))
+      (sxql:offset (* (1- page) *post-per-page*)))))
+
+(defun db-search-post (type keywords page)
+  (let* ((ks (mapcar (lambda (k) (concatenate 'string "%%" k "%%")) keywords))
+         (qs (mapcar (lambda (k) `(:like ,type ,k)) ks)))
+    ;; (format t "~%type:~a keywords:~a page:~a~%" type keywords page)
+    (mito:select-dao 'post
+      (sxql:order-by (:desc :created-at))
+      (sxql:limit *post-per-page*)
+      (sxql:where `(:or ,@qs))
+      (sxql:offset (* (1- page) *post-per-page*)))))
+
 (defun db-add-post (title content author)
   "add post"
   (let ((post

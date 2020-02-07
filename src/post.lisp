@@ -37,6 +37,30 @@
                   post-list))
     (st-json:write-json-to-string json)))
 
+(defun get-search-result (search-type keywords &optional page)
+  "Return search result."
+  (let* ((json (st-json:jso))
+         (p (if (not page)
+                1
+                (if (stringp page)
+                    (parse-integer page)
+                    page)))
+         (total-page-count 2)
+         (str-ks (mapcar #'string keywords))
+         (post-list (if (equal search-type "author")
+                        (db-search-post :author str-ks p)
+                        (db-search-post :title str-ks p))))
+    (format t "page : ~a post:~a" p post-list)
+    (setf (st-json:getjso "totalPage" json) total-page-count)
+    (setf (st-json:getjso "currentPage" json) p)
+    (setf (st-json:getjso "list" json)
+          (mapcar (lambda (x) (make-post-json
+                               (mito:object-id x)
+                               (slot-value x 'title)
+                               (slot-value x 'author-nickname)))
+                  post-list))
+    (st-json:write-json-to-string json)))
+
 
 (defun write-post (user-id title content)
   (let ((user (db-user-find user-id)))
