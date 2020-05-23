@@ -7,7 +7,8 @@
    (name :col-type (:varchar 24))
    (nickname :col-type (:varchar 24))
    (email :col-type (:varchar 64))
-   (password :col-type (:varchar 24))))
+   (password-salt :col-type (:varchar 16))
+   (password-hash :col-type (:varchar 32))))
 
 (mito:deftable post ()
   ((title :col-type (:varchar 128))
@@ -26,14 +27,15 @@
 (defun db-user-duplicate-t (id email)
   (or (mito:find-dao 'user :id id) (mito:find-dao 'user :email email)))
 
-(defun db-user-add (id name nickname email password)
+(defun db-user-add (id name nickname email password-salt password-hash)
   (if (db-user-duplicate-t id email)
       'exists
       (mito:create-dao 'user :id id
                              :name name
                              :nickname nickname
                              :email email
-                             :password password)))
+                             :password-salt password-salt
+                             :password-hash password-hash)))
 
 (defun db-user-remove (id)
   (let ((user (mito:find-dao 'user :id id)))

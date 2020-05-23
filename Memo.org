@@ -29,10 +29,11 @@
   table(user) {
           id          INTEGER
           ..
-          name        VARCHAR(24)
-          nick_name   VARCHAR(24)
-          email       VARCHAR(64)
-          password    VARCHAR(24)
+          name            VARCHAR(24)
+          nick_name       VARCHAR(24)
+          email           VARCHAR(64)
+          password-salt   VARCHAR(16)
+          password-hash   VARCHAR(32)
   }
 
   table(post) {
@@ -85,4 +86,5 @@ CLOSED: [2019-12-27 Fri 15:52]
 ** TODO Change user password
 ** TODO Reply system
 ** TODO Deploy
-** TODO Save encrypted password
+** DONE Save encrypted password
+CLOSED: [2020-05-23 Sat 14:58]

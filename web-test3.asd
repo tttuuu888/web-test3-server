@@ -9,6 +9,7 @@
                "trivia"
                "mito"
                "st-json"
+               "ironclad"
                "iterate")
   :components ((:module "src"
                 :components

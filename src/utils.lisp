@@ -15,3 +15,10 @@
              (setf key   (pop pairs)
                    value (pop pairs)))
     json))
+
+
+(defun string-to-byte-array (str)
+  (map '(vector (unsigned-byte 8)) #'char-code str))
+
+(defun byte-array-to-string (arr)
+  (map 'string #'code-char arr))

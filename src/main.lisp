@@ -4,6 +4,7 @@
 
 (defun main (&optional tmp)
   (declare (ignore tmp))
+  (setf *random-state* (make-random-state t))
   (db-init)
   (format t "web test project3~%")
   (setf *server*
